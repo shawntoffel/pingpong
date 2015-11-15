@@ -1,7 +1,7 @@
 package httpUtils
 
 import (
-	"github.com/pingpong/models"
+	"github.com/shawntoffel/pingpong/models"
 	"net"
 )
 
