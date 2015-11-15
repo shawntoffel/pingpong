@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/pingpong/controllers"
+	"github.com/shawntoffel/pingpong/controllers"
 )
 
 func main() {

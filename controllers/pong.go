@@ -4,9 +4,9 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
-	"github.com/pingpong/models"
-	"github.com/pingpong/utilities/httpUtils"
-	"github.com/pingpong/utilities/responseUtils"
+	"github.com/shawntoffel/pingpong/models"
+	"github.com/shawntoffel/pingpong/utilities/httpUtils"
+	"github.com/shawntoffel/pingpong/utilities/responseUtils"
 )
 
 type (
