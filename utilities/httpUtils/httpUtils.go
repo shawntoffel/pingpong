@@ -5,12 +5,13 @@ import (
 	"net"
 )
 
+// Returns an IP address extracted from a RemoteAddr
 func GetRemoteIp(remoteAddress string) (string, *models.Error) {
 
 	// Extract the ip from the request Remote Address
 	extractedIp, _, splitError := net.SplitHostPort(remoteAddress)
 
-	// Build an error if we cant extract the ip
+	// Return an error if we cant extract the ip
 	if splitError != nil {
 
 		extractError := models.Error{
