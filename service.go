@@ -5,7 +5,7 @@ import (
 )
 
 type PingPongService interface {
-	Ping() (string, error)
+	Ping(string) (string, error)
 }
 
 type pingPongService struct{}

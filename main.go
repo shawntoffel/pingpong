@@ -1,8 +1,9 @@
 package main
 
 import (
-	"log"
+	"github.com/go-kit/kit/log"
 	"net/http"
+	"os"
 
 	"golang.org/x/net/context"
 
@@ -11,7 +12,11 @@ import (
 
 func main() {
 	backgroundContext := context.Background()
-	service := pingPongService{}
+	logger := log.NewJSONLogger(os.Stderr)
+
+	var service PingPongService
+	service = pingPongService{}
+	service = LoggingMiddleware{logger, service}
 
 	pongHandler := httpTransport.NewServer(
 		backgroundContext,
@@ -21,5 +26,6 @@ func main() {
 	)
 
 	http.Handle("/ping", pongHandler)
-	log.Fatal(http.ListenAndServe(":10002", nil))
+	logger.Log("msg", "HTTP", "addr", ":10002")
+	logger.Log("err", http.ListenAndServe(":10003", nil))
 }

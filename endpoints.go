@@ -5,7 +5,7 @@ import (
 	"golang.org/x/net/context"
 )
 
-func MakePingEndpoint(service pingPongService) endpoint.Endpoint {
+func MakePingEndpoint(service PingPongService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		pingRequest := request.(PingRequest)
 
