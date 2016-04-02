@@ -14,8 +14,7 @@ func (pingPongService) Ping(pingRequest PingRequest) (string, error) {
 
 	remoteAddress := pingRequest.HttpRequest.RemoteAddr
 
-	// Extract the ip from the request Remote Address
-	extractedIp, _, splitError := net.SplitHostPort(remoteAddress)
+	ipAddress, _, err := net.SplitHostPort(remoteAddress)
 
-	return extractedIp, splitError
+	return ipAddress, err
 }

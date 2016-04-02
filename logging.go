@@ -10,8 +10,6 @@ type LoggingMiddleware struct {
 	PingPongService
 }
 
-type LoggingError struct{}
-
 func (mw LoggingMiddleware) HandleLoggingError(err error, method string) error {
 	if err != nil {
 		defer func(begin time.Time) {

@@ -27,5 +27,5 @@ func main() {
 
 	http.Handle("/ping", pongHandler)
 	logger.Log("msg", "HTTP", "addr", ":10002")
-	logger.Log("err", http.ListenAndServe(":10003", nil))
+	logger.Log("err", http.ListenAndServe(":10002", nil))
 }

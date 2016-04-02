@@ -12,7 +12,7 @@ func MakePingEndpoint(service PingPongService) endpoint.Endpoint {
 		pong, err := service.Ping(pingRequest)
 
 		if err != nil {
-			return ErrorResponse{"Could not determine client IP address", err.Error()}, nil
+			return ErrorResponse{"Could not determine IP address", err.Error()}, nil
 		}
 
 		return PingResponse{pong}, nil
