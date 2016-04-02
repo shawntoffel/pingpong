@@ -5,12 +5,15 @@ import (
 )
 
 type PingPongService interface {
-	Ping(string) (string, error)
+	Ping(PingRequest) (string, error)
 }
 
 type pingPongService struct{}
 
-func (pingPongService) Ping(remoteAddress string) (string, error) {
+func (pingPongService) Ping(pingRequest PingRequest) (string, error) {
+
+	remoteAddress := pingRequest.HttpRequest.RemoteAddr
+
 	// Extract the ip from the request Remote Address
 	extractedIp, _, splitError := net.SplitHostPort(remoteAddress)
 

@@ -10,19 +10,38 @@ type LoggingMiddleware struct {
 	PingPongService
 }
 
-func (mw LoggingMiddleware) Ping(s string) (output string, err error) {
+type LoggingError struct{}
+
+func (mw LoggingMiddleware) HandleLoggingError(err error, method string) error {
+	if err != nil {
+		defer func(begin time.Time) {
+			mw.Logger.Log(
+				"loggingError", err,
+				"method", method,
+				"ts", begin.UTC(),
+			)
+		}(time.Now())
+	}
+
+	return nil
+}
+
+func (mw LoggingMiddleware) Ping(pingRequest PingRequest) (output string, err error) {
 	defer func(begin time.Time) {
-		_ = mw.Logger.Log(
-			"Method", "Ping",
-			"RequestAddress", s,
-			"Output", output,
-			"Error", err,
-			"Took", time.Since(begin),
+		err = mw.Logger.Log(
+			"method", "Ping",
+			"requestAddress", pingRequest.HttpRequest.RemoteAddr,
+			"output", output,
+			"error", err,
+			"took", time.Since(begin),
+			"ts", begin.UTC(),
 		)
+
+		err = mw.HandleLoggingError(err, "Ping")
 
 	}(time.Now())
 
-	output, err = mw.PingPongService.Ping(s)
+	output, err = mw.PingPongService.Ping(pingRequest)
 
 	return
 }

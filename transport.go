@@ -6,7 +6,7 @@ import (
 )
 
 type PingRequest struct {
-	RemoteAddress string `json:"remoteAddress"`
+	HttpRequest *http.Request
 }
 
 type PingResponse struct {
@@ -19,7 +19,11 @@ type ErrorResponse struct {
 }
 
 func DecodePingRequest(r *http.Request) (request interface{}, err error) {
-	return PingRequest{r.RemoteAddr}, nil
+	pingRequest := PingRequest{
+		HttpRequest: r,
+	}
+
+	return pingRequest, nil
 }
 
 func EncodeResponse(w http.ResponseWriter, response interface{}) error {

@@ -9,7 +9,7 @@ func MakePingEndpoint(service PingPongService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		pingRequest := request.(PingRequest)
 
-		pong, err := service.Ping(pingRequest.RemoteAddress)
+		pong, err := service.Ping(pingRequest)
 
 		if err != nil {
 			return ErrorResponse{"Could not determine client IP address", err.Error()}, nil
