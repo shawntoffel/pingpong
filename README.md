@@ -2,7 +2,7 @@
 
 Simple Go service to return a JSON response containing the client's IP address.
 
-[shawntoffel.com:10002/ping](http://shawntoffel.com:10002/ping)
+[ping.shawntoffel.com:10002/ping](http://ping.shawntoffel.com:10002/ping)
 
     
   
