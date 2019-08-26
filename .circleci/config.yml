@@ -1,12 +1,12 @@
-version: 2
-jobs:
-  test:
-    docker:
-      - image: golang:1.11.6
-    steps:
-      - checkout
-      - run: make
-  docker-build:                                                                  
+ version: 2                                                                       
+ jobs:                                                                            
+   test:                                                                          
+     docker:                                                                      
+       - image: golang:1.11.6                                                     
+     steps:                                                                       
+       - checkout                                                                 
+       - run: make                                                                
+   docker-build:                                                                  
      docker:                                                                      
          - image: docker:stable-git                                               
      steps:                                                                       
