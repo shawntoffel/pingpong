@@ -7,7 +7,8 @@ import (
 	"strings"
 )
 
-func findOriginatingIP(r *http.Request) (string, error) {
+// OriginatingIP attempts to find the originating IP for a request
+func OriginatingIP(r *http.Request) (string, error) {
 	xForwardedFor := r.Header.Get("x-forwarded-for")
 	if xForwardedFor == "" {
 		remoteAddr, _, err := net.SplitHostPort(r.RemoteAddr)
@@ -29,9 +30,9 @@ func findOriginatingIP(r *http.Request) (string, error) {
 	return ip.String(), nil
 }
 
-// OriginatingIP responds with the originating IP address of a client
-func OriginatingIP(w http.ResponseWriter, r *http.Request) {
-	originatingIP, err := findOriginatingIP(r)
+// OriginatingIPHandler responds with the originating IP address of a client
+func OriginatingIPHandler(w http.ResponseWriter, r *http.Request) {
+	originatingIP, err := OriginatingIP(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
