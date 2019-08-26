@@ -37,5 +37,5 @@ func OriginatingIP(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintln(w, originatingIP)
+	fmt.Fprint(w, originatingIP)
 }
