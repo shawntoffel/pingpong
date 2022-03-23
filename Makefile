@@ -2,7 +2,7 @@ TAG=$(shell git describe --tags --always)
 VERSION=$(TAG:v%=%)
 NAME=pingpong
 REPO=shawntoffel/$(NAME)
-GO=GO111MODULE=on go
+GO=go
 BUILD=GOARCH=amd64 $(GO) build -ldflags="-s -w -X main.Version=$(VERSION)" 
 
 .PHONY: all deps test build build-linux docker-build docker-save docker-deploy clean
@@ -31,4 +31,4 @@ docker-deploy:
 	docker push $(REPO):$(VERSION)
 
 clean:
-	@find bin -type f ! -name '*.toml' -delete -print
+	@find bin -type f -delete -print

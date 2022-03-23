@@ -32,6 +32,11 @@ func OriginatingIP(r *http.Request) (string, error) {
 
 // OriginatingIPHandler responds with the originating IP address of a client
 func OriginatingIPHandler(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path != "/" {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+
 	originatingIP, err := OriginatingIP(r)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
